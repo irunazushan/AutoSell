@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.*;
 import java.util.stream.IntStream;
 
-@Repository //стереотипичная анотация
+@Repository
 public class InMemoryCarRepository implements CarRepository {
     private List<Car> cars;
 

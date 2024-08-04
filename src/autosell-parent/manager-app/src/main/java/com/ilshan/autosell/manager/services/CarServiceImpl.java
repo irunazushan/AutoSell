@@ -12,7 +12,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class CarServiceImpl implements CarService {
-    private final CarRepository carRepository; //лучше всегда зависеть от интерфейсов чтобы в любо ймомент мы могли заменить одну реалищацию на другую в конфигах проекта
+    private final CarRepository carRepository;
 
     @Override
     public List<Car> findAllCars() {
