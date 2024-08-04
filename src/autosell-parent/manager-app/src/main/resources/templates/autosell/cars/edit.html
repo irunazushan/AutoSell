@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование авто &laquo;[[${car.name}]]&raquo; &ndash; AutoSell</title>
+</head>
+<body>
+
+<a data-th-href="@{/autosell/cars/{carId}(carId=${car.id})}">&larr; Назад к авто </a>
+
+<h1>Редактирование карточки &ndash; &laquo;[[${car.name}]]&raquo;</h1>
+<form method="post" data-th-action="@{/autosell/cars/{carId}/edit(carId=${car.id})}" data-th-object="${payload}">
+    <label>
+        Марка автомобиля:<br>
+        <input type="text" name="name" data-th-value="${payload.name != null ? payload.name : car.name}">
+    </label><br>
+    <div style="color:red" data-th-if="${#fields.hasErrors('name')}" data-th-errors="*{name}">FIO error</div>
+
+    <label>
+        Описание автомобиля:<br>
+        <textarea name="description" data-th-text="${payload.description != null ? payload.description : car.description}"></textarea>
+    </label><br>
+    <div style="color:red" data-th-if="${#fields.hasErrors('description')}" data-th-errors="*{description}">FIO error</div>
+
+    <label>
+        Цена автомобиля:<br>
+        <input type="number" name="price" data-th-value="${payload.price != null ? payload.price : car.price}">
+    </label><br>
+    <div style="color:red" data-th-if="${#fields.hasErrors('price')}" data-th-errors="*{price}">FIO error</div>
+    <button type="submit">Изменить</button>
+</form>
+
+</body>
+</html>
