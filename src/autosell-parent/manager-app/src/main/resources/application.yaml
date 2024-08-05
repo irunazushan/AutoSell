@@ -1,0 +1,3 @@
+autosell:
+  services:
+    uri: http://localhost:8081

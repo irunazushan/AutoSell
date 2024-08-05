@@ -1,6 +1,6 @@
-package com.ilshan.autosell.manager.repositories;
+package com.ilshan.autosell.repositories;
 
-import com.ilshan.autosell.manager.entity.Car;
+import com.ilshan.autosell.entity.Car;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,7 +1,7 @@
-package com.ilshan.autosell.manager.services;
+package com.ilshan.autosell.services;
 
-import com.ilshan.autosell.manager.entity.Car;
-import com.ilshan.autosell.manager.repositories.CarRepository;
+import com.ilshan.autosell.entity.Car;
+import com.ilshan.autosell.repositories.CarRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
