@@ -8,12 +8,13 @@
 
 <a data-th-href="@{/autosell/cars/{carId}(carId=${car.id})}">&larr; Назад к авто </a>
 
+<h1>Редактирование карточки &ndash; &laquo;[[${car.name}]]&raquo;</h1>
+
 <h2 data-th-if="${errors}">Ошибка при вводе данных</h2>
 <ul>
     <li style="color:red" data-th-each="error : ${errors}" data-th-text="${error}"></li>
 </ul>
 
-<h1>Редактирование карточки &ndash; &laquo;[[${car.name}]]&raquo;</h1>
 <form method="post" data-th-action="@{/autosell/cars/{carId}/edit(carId=${car.id})}">
     <label>
         Марка автомобиля:<br>

@@ -5,6 +5,7 @@ import com.ilshan.autosell.controllers.payloads.NewCarPayload;
 import com.ilshan.autosell.controllers.payloads.UpdateCarPayload;
 import com.ilshan.autosell.entity.Car;
 import com.ilshan.autosell.services.CarService;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
@@ -40,6 +41,7 @@ public class CarRestController {
     }
 
     @PatchMapping
+    @Transactional
     public ResponseEntity<?> editCar(@PathVariable("carId") int carId, @Valid @RequestBody UpdateCarPayload payload,
                                      BindingResult bindingResult) throws BindException {
         if (bindingResult.hasErrors()) {
@@ -55,6 +57,7 @@ public class CarRestController {
     }
 
     @DeleteMapping
+    @Transactional
     public ResponseEntity<Void> deleteCar(@PathVariable("carId") int carId) {
         carService.deleteCar(carId);
         return  ResponseEntity.noContent().build();

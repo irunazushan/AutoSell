@@ -1,17 +1,8 @@
 package com.ilshan.autosell.repositories;
 
 import com.ilshan.autosell.entity.Car;
+import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
-import java.util.Optional;
-
-public interface CarRepository {
-    List<Car> findAll();
-
-    Car save(Car car);
-
-    Optional<Car> findById(Integer carId);
-
-
-    void deleteById(int carId);
+public interface CarRepository extends CrudRepository<Car, Integer> {
+    Iterable<Car> findAllByNameLikeIgnoreCase(String filter);
 }

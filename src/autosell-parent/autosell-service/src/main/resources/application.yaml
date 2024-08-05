@@ -1,2 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/autosell
+    username: autosell
+    password: autosell
+  flyway:
+    schemas:
+      - public
+      - autosell
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
 server:
   port: 8081
+logging:
+  level:
+    sql: info
+

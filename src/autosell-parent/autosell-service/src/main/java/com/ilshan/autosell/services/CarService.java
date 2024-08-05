@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CarService {
-    List<Car> findAllCars();
+    Iterable<Car> findAllCars(String filter);
 
     Car saveCar(String name, String description, String price);
 

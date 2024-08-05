@@ -4,6 +4,7 @@ import com.ilshan.autosell.entity.Car;
 import com.ilshan.autosell.repositories.CarRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -15,21 +16,17 @@ public class CarServiceImpl implements CarService {
     private final CarRepository carRepository;
 
     @Override
-    public List<Car> findAllCars() {
-        return carRepository.findAll();
+    public Iterable<Car> findAllCars(String filter) {
+        if (filter != null && !filter.isBlank()) {
+            return carRepository.findAllByNameLikeIgnoreCase(filter);
+        } else {
+            return carRepository.findAll();
+        }
     }
 
     @Override
     public Car saveCar(String name, String description, String price) {
-        Integer intPrice = null;
-        if (price != null) {
-            try {
-                intPrice = Integer.parseInt(price);
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("Invalid price format: " + price);
-            }
-        }
-        return carRepository.save(new Car (null, name, description, intPrice));
+        return carRepository.save(new Car (null, name, description, Integer.parseInt(price)));
     }
 
     @Override
