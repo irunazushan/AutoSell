@@ -21,10 +21,10 @@ public class CarRestClientImlp implements CarRestClient {
     private final RestClient restClient;
 
     @Override
-    public List<Car> findAllCars() {
-        return this.restClient
+    public List<Car> findAllCars(String filter) {
+        return restClient
                 .get()
-                .uri("/autosell-api/cars")
+                .uri("/autosell-api/cars?filter={filter}", filter)
                 .retrieve()
                 .body(CAR_TYPE_REFERENCE);
     }
@@ -32,7 +32,7 @@ public class CarRestClientImlp implements CarRestClient {
     @Override
     public Car createCar(String name, String description, String price) {
         try {
-            return this.restClient
+            return restClient
                     .post()
                     .uri("/autosell-api/cars")
                     .body(new NewCarPayload(name, description, price))
@@ -47,7 +47,7 @@ public class CarRestClientImlp implements CarRestClient {
     @Override
     public Optional<Car> findCar(Integer carId) {
         try {
-            return Optional.ofNullable(this.restClient
+            return Optional.ofNullable(restClient
                     .get()
                     .uri("/autosell-api/car/{carId}", carId)
                     .retrieve()
@@ -60,7 +60,7 @@ public class CarRestClientImlp implements CarRestClient {
     @Override
     public void updateCar(int carId, String name, String description, String price) {
         try {
-            this.restClient
+            restClient
                     .patch()
                     .uri("/autosell-api/car/{carId}", carId)
                     .body(new UpdateCarPayload(name, description, price))
@@ -75,7 +75,7 @@ public class CarRestClientImlp implements CarRestClient {
     @Override
     public void deleteCar(int carId) {
         try {
-            this.restClient
+            restClient
                     .delete()
                     .uri("/autosell-api/car/{carId}", carId)
                     .retrieve()

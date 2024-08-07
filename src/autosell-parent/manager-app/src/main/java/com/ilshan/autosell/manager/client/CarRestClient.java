@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CarRestClient {
-    List<Car> findAllCars();
+    List<Car> findAllCars(String filter);
 
     Car createCar(String name, String description, String price);
 

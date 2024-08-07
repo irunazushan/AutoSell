@@ -5,6 +5,12 @@
     <title>Список автомобилей &ndash; AutoSell</title>
 </head>
 <body>
+
+<form method="get" data-th-action="@{/autosell/cars}">
+    <label>Поиск: <input type="text" name="filter" data-th-value="${filter}">
+        <button type="submit">Найти</button></label>
+</form>
+
 <h1>Список автомобилей</h1>
 
 <table>

@@ -18,7 +18,7 @@ public class CarServiceImpl implements CarService {
     @Override
     public Iterable<Car> findAllCars(String filter) {
         if (filter != null && !filter.isBlank()) {
-            return carRepository.findAllByNameLikeIgnoreCase(filter);
+            return carRepository.findAllByNameLikeIgnoreCase("%" + filter + "%");
         } else {
             return carRepository.findAll();
         }
@@ -36,7 +36,7 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void updateCar(int carId, String name, String description, String price) {
-        this.carRepository.findById(carId)
+        carRepository.findById(carId)
                 .ifPresentOrElse(product -> {
                     product.setName(name);
                     product.setDescription(description);

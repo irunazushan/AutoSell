@@ -23,7 +23,7 @@ public class CarsRestController {
 
     @GetMapping
     public Iterable<Car> getCars(@RequestParam(name = "filter", required = false) String filter) {
-        return this.carService.findAllCars(filter);
+        return carService.findAllCars(filter);
     }
 
     @PostMapping

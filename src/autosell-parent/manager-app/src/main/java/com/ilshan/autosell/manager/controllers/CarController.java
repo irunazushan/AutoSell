@@ -26,7 +26,7 @@ public class CarController {
 
     @ModelAttribute("car")
     public Car car(@PathVariable("carId") int carId) {
-        return this.carRestClient.findCar(carId).orElseThrow(() -> new NoSuchElementException("autosell.errors.cars.auto_not_found"));
+        return carRestClient.   findCar(carId).orElseThrow(() -> new NoSuchElementException("autosell.errors.cars.auto_not_found"));
     }
 
     @GetMapping
@@ -44,7 +44,7 @@ public class CarController {
                           @ModelAttribute("payload") UpdateCarPayload payload,
                           Model model) {
         try {
-            this.carRestClient.updateCar(car.id(), payload.name(), payload.description(), payload.price());
+            carRestClient.updateCar(car.id(), payload.name(), payload.description(), payload.price());
             return "redirect:/autosell/cars/%d".formatted(car.id());
         } catch (BadRequestException exception) {
             model.addAttribute("payload", payload);
@@ -55,7 +55,7 @@ public class CarController {
 
     @PostMapping("/delete")
     public String deleteCar(@PathVariable("carId") int carId) {
-        this.carRestClient.deleteCar(carId);
+        carRestClient.deleteCar(carId);
         return "redirect:/autosell/cars";
     }
 
@@ -63,7 +63,7 @@ public class CarController {
     public String handleNoElementError(NoSuchElementException error, Model model, HttpServletResponse httpResponse, Locale locale) {
         httpResponse.setStatus(HttpServletResponse.SC_NOT_FOUND);
         model.addAttribute("error",
-                this.messageSource.getMessage(error.getMessage(),
+                messageSource.getMessage(error.getMessage(),
                         new Object[0], error.getMessage(), locale));
         return "errors/404";
     }

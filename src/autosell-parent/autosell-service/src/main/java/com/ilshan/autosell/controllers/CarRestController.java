@@ -5,7 +5,6 @@ import com.ilshan.autosell.controllers.payloads.NewCarPayload;
 import com.ilshan.autosell.controllers.payloads.UpdateCarPayload;
 import com.ilshan.autosell.entity.Car;
 import com.ilshan.autosell.services.CarService;
-import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.context.MessageSource;
@@ -13,11 +12,10 @@ import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.Locale;
 import java.util.NoSuchElementException;
@@ -26,13 +24,14 @@ import java.util.Objects;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/autosell-api/car/{carId:\\d+}")
+@Transactional(readOnly = true)
 public class CarRestController {
     private final CarService carService;
     private final MessageSource messageSource;
 
     @ModelAttribute("car")
     public Car getCar(@PathVariable("carId") int carId) {
-        return this.carService.findCar(carId)
+        return carService.findCar(carId)
                 .orElseThrow(() -> new NoSuchElementException("autosell.errors.cars.auto_not_found"));
     }
     @GetMapping

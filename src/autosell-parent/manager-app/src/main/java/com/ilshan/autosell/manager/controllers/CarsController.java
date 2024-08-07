@@ -18,8 +18,9 @@ public class CarsController {
     private final CarRestClient carRestClient;
 
     @GetMapping
-    public String getCarsList(Model model) {
-        model.addAttribute("cars", carRestClient.findAllCars());
+    public String getCarsList(@RequestParam(value = "filter", required = false) String filter, Model model) {
+        model.addAttribute("cars", carRestClient.findAllCars(filter));
+        model.addAttribute("filter", filter);
         return "/autosell/cars/list";
     }
 
@@ -32,7 +33,7 @@ public class CarsController {
     public String createCar(@ModelAttribute("payload") NewCarPayload payload,
                             Model model) {
         try {
-            Car car = this.carRestClient.createCar(payload.name(), payload.description(), payload.price());
+            Car car = carRestClient.createCar(payload.name(), payload.description(), payload.price());
             return "redirect:/autosell/cars/%d".formatted(car.id());
         } catch (BadRequestException exception) {
             model.addAttribute("payload", payload);
