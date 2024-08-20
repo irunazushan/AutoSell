@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список автомобилей &ndash; AutoSell</title>
+</head>
+<body>
+
+<form method="get" data-th-action="@{/autosell/cars}">
+    <label>Поиск: <input type="text" name="filter" data-th-value="${filter}">
+        <button type="submit">Найти</button></label>
+</form>
+
+<h1>Список автомобилей</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>Name</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr data-th-each="car : ${cars}">
+            <td data-th-text="${car.id}"></td>
+            <td>
+                <a data-th-href="@{/autosell/cars/{carId}(carId=${car.id})}" data-th-text="${car.name}"></a>
+            </td>
+            <td data-th-text="${car.price}"></td>
+        </tr>
+    </tbody>
+</table>
+<br>
+<a data-th-href="@{/autosell/cars/create}">+ Добавить автомобиль</a>
+</body>
+</html>

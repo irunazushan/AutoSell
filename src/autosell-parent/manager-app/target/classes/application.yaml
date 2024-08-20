@@ -1,0 +1,21 @@
+autosell:
+  services:
+    uri: http://localhost:8081
+    registration-id: keycloak
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8082/realms/autosell
+            user-name-attribute: preferred_username
+        registration:
+          keycloak:
+            client-id: manager-app
+            client-secret: w4rawb6A3TDoj3R1PcuKibe2AI7QQ3pF
+            scope:
+              - openid
+              - view_autosell
+              - edit_autosell
+              - microprofile-jwt
