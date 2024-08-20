@@ -1,0 +1,1 @@
+docker run --name autosell-db -p 5432:5432 -e POSTGRES_DB=autosell -e POSTGRES_USER=autosell -e POSTGRES_PASSWORD=autosell postgres:16

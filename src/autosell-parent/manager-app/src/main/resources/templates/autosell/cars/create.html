@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить авто &ndash; AutoSell</title>
+</head>
+<body>
+
+<a data-th-href="@{/autosell/cars}">&larr; назад </a>
+<h1>Создание карточки</h1>
+
+<h2 data-th-if="${errors}">Ошибка при вводе данных</h2>
+<ul>
+    <li style="color:red" data-th-each="error : ${errors}" data-th-text="${error}"></li>
+</ul>
+
+<form method="post" data-th-action="@{/autosell/cars/create}">
+    <label>
+        Марка автомобиля:<br>
+        <input type="text" name="name" data-th-value="${payload?.name}">
+    </label><br>
+
+    <label>
+        Описание автомобиля:<br>
+        <textarea name="description" data-th-text="${payload?.description}"></textarea>
+    </label><br>
+
+    <label>
+        Цена автомобиля:<br>
+        <input type="number" name="price" data-th-value="${payload?.price}">
+    </label><br>
+    <button type="submit">Создать</button>
+</form>
+
+</body>
+</html>
