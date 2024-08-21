@@ -21,9 +21,10 @@ public class ClientBeans {
             @Value("${autosell.services.registration-id:keycloak}") String registrationId) {
         return new CarRestClientImlp(RestClient.builder()
                 .baseUrl(autosellBaseUri)
-                .requestInterceptor(new OAuthClientHttpRequestInterceptor(
-                        new DefaultOAuth2AuthorizedClientManager(clientRegistrationRepository,
-                                authorizedClientRepository), registrationId))
+                .requestInterceptor(
+                        new OAuthClientHttpRequestInterceptor(
+                                new DefaultOAuth2AuthorizedClientManager(clientRegistrationRepository,
+                                        authorizedClientRepository), registrationId))
                 .build());
     }
 }

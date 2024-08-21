@@ -13,7 +13,7 @@ spring:
         registration:
           keycloak:
             client-id: manager-app
-            client-secret: w4rawb6A3TDoj3R1PcuKibe2AI7QQ3pF
+            client-secret: H6MGjceannB3OxrPw9fO8bE7umcV9aDR
             scope:
               - openid
               - view_autosell
